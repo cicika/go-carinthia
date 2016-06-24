@@ -9,7 +9,5 @@ import (
 func main() {
   fmt.Printf("Startng up ...")
   
-  db.CreateTables()
-  
   api.StartHttpServer()  
 }

@@ -14,6 +14,18 @@ func TripStart(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 func TripSegment(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
   response := model.HttpResponse{501, "NotImplemented"}
   RespondWith(w, response)
+
+  /*
+    JSON fields:
+      transportStation (name or id)
+      transportType
+      beaconIdentifier
+      latitude
+      longitude
+      createdAt (unix timestamp)
+      checkInType
+
+   */
 }
 
 func TripEnd(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {

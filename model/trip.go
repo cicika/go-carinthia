@@ -1,22 +1,24 @@
 package model
 
-type Trip {
+import "math/big"
+
+type Trip struct {
   Id int64
   UserId int64
   StartedAt int64 /* Unix timestamp */
   EndedAt int64 /* Unix timestamp */
-  TotalPrice float
+  TotalPrice big.Float
 }
 
-type TripSegment {
+type TripSegment struct {
   Id int64
   UserId int64
   BeaconId string
   TripId int64
   CheckInType int
   TransportStationId int64
-  Latitude float
-  Longitude float
+  Latitude float32
+  Longitude float32
   PassedAt int64 /* Unix timestamp */
 }
 

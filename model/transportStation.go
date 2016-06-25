@@ -1,11 +1,11 @@
 package model
 
-type TransportStation {
+type TransportStation struct {
   Id int64
   Name string
   ProvidersIdentifier int
-  Latitude float
-  Longitude float
+  Latitude float32
+  Longitude float32
   Type string
   ZoneId int64
 }

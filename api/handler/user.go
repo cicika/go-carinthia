@@ -6,12 +6,17 @@ import (
   "net/http"
 )
 
-func User(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+func RegisterUser(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
   response := model.HttpResponse{501, "NotImplemented"}
   RespondWith(w, response)
 }
 
-func RegisterUser(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+  response := model.HttpResponse{501, "NotImplemented"}
+  RespondWith(w, response)
+}
+
+func User(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
   response := model.HttpResponse{501, "NotImplemented"}
   RespondWith(w, response)
 }

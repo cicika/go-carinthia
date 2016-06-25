@@ -9,10 +9,10 @@ URL: `http://gocarinthia.cicika.info`
 `POST /user/register`
 
 ```json
-    email: mail@address.com,
-    name: Full Name,
-    password: password,
-    beacon_identifier: asdfasdf, //optional
+    Email: mail@address.com,
+    Name: Full Name,
+    Password: password,
+    BeaconIdentifier: asdfasdf, //optional
 ```
 
 Response:
@@ -22,22 +22,22 @@ Response:
 `POST /user/login`
 
 ```json
-    email: mail@addres.com,
-    password: password
+    Email: mail@addres.com,
+    Password: password
 ```
 
 Response:
 
 ```json
-    id: 123,
-    auth_token: token,
-    type: passenger
+    Id: 123,
+    AuthToken: token,
+    Type: passenger
 ```
 
 `POST /trip/start` //depends if you want to start trip separately or on login, 2nd means one action less for the user
 
 ```json
-    started_at: unix timestamp
+    StartedAt: unix timestamp
 ```
 
 Response: `200 OK`
@@ -45,7 +45,7 @@ Response: `200 OK`
 `POST /trip/end` //if not posted by device, backend will handle it
 
 ```json
-    ended_at: unix timestamp
+    EndedAt: unix timestamp
 ```
 
 Response: `200 OK`
@@ -53,13 +53,13 @@ Response: `200 OK`
 `POST /trip/segment`
 
 ```json
-    transport_station: (name or id from location database),
-    transport_type: type from location database (can be empty),
-    beacon_identifier: regiestered beacon,
-    latitude: 44.28,
-    longitude: 21.13, //don't care about decimals, send all
-    created_at: unix timestamp)
-    check_in_type: 0 for start, 1 for stop, 2 for end
+    TransportStation: (name or id from location database),
+    TransportType: type from location database (can be empty),
+    BeaconIdentifier: regiestered beacon,
+    Latitude: 44.28,
+    Longitude: 21.13, //don't care about decimals, send all
+    CreatedAt: unix timestamp)
+    CheckInType: 0 for start, 1 for stop, 2 for end
 ```
 
 `GET /user/:user_id/:beacon_identifier`
@@ -67,6 +67,6 @@ Response: `200 OK`
 Response:
 
 ```json
-     last_checkin_at: unix timestamp,
-     beacon_identifier: string
+     LastCheckinAt: unix timestamp,
+     BeaconIdentifier: string
 ```

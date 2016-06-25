@@ -2,6 +2,8 @@
 
 No fuss. Just ride.
 
+URL: `http://gocarinthia.cicika.info`
+
 `Authorization: GoCarinthia auth_token`
 
 `POST /user/register`

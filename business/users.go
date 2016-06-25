@@ -10,10 +10,10 @@ import (
 
 func CreateUser(paramMap map[string]string) {
   params := []string{paramMap["email"],
-                       util.MD5(paramMap["password"]),
-                       paramMap["name"], 
-                       authToken(paramMap["email"], paramMap["name"]),
-                       "passenger", "" }
+                     util.MD5(paramMap["password"]),
+                     paramMap["name"], 
+                     authToken(paramMap["email"], paramMap["name"]),
+                     "passenger", "" }
 
   db.Execute(len(params), params, db.UserQ("CreateUser"))
 }

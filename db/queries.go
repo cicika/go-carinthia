@@ -7,6 +7,7 @@ func UserQ(q string)string{
     "CreateUser": query.CreateUser,
     "UpdateAuthToken": query.UpdateAuthToken,
     "CheckLoginDetails" : query.CheckLoginDetails,
+    "CheckToken" : query.CheckToken,
   }
   return mapping[q]
 }

@@ -1,6 +1,7 @@
 package handler
 
 import (
+  "github.com/cicika/go-carinthia/db"
   "github.com/julienschmidt/httprouter"
   "fmt"
   "net/http"
@@ -16,9 +17,10 @@ func BasicAuth(h httprouter.Handle) httprouter.Handle {
 
     if strings.HasPrefix(auth, basicAuthPrefix) {
       token := strings.SplitAfter(auth, basicAuthPrefix)[1]
+      users := checkToken(token)
       
-      if string(token[:]) == "auth_token" {
-        h(w, r, append(ps, httprouter.Param{"uid", "1"}))
+      if len(users) > 0 {
+        h(w, r, append(ps, httprouter.Param{"uid", string(users[0])}))
         return
       }
     }
@@ -26,4 +28,8 @@ func BasicAuth(h httprouter.Handle) httprouter.Handle {
     w.Header().Set("WWW-Authenticate", "GoCarinthia realm=Restricted")
     http.Error(w, http.StatusText(http.StatusUnauthorized), http.StatusUnauthorized)
   }
+}
+
+func checkToken(token string) []int64 {
+  return db.ExecuteWithId(1, []string{token}, db.UserQ("CheckToken"))
 }

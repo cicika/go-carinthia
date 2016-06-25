@@ -12,7 +12,7 @@ func CreateUser(paramMap map[string]string) {
   params := []string{paramMap["Email"],
                      util.MD5(paramMap["Password"]),
                      paramMap["Name"],
-                     paramMap["Age"],
+                     paramMap["BirthYear"],
                      authToken(paramMap["Email"], paramMap["Name"]),
                      "passenger", "" }
 

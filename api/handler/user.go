@@ -15,10 +15,10 @@ func RegisterUser(w http.ResponseWriter, r *http.Request, params httprouter.Para
   var extracted map[string]string
   //fmt.Printf("%s", r.FormValue("Password"))
   //fmt.Printf("%s", params.ByName("Email"))
-  required := []string{"Email", "Password", "Name", "Age"}
+  required := []string{"Email", "Password", "Name", "BirthYear"}
 
   if ValidateRequired(required, r) == true {
-    forExtraction := []string{"Email", "Password", "Name", "Age"}
+    forExtraction := []string{"Email", "Password", "Name", "BirthYear"}
     extracted = ExtractParams(forExtraction, r)
     business.CreateUser(extracted)
     response = model.HttpResponse{200, ""}  

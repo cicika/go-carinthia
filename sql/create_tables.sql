@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS users (
   id serial PRIMARY KEY,
   email text UNIQUE,
+  password text,
   name text NOT NULL,
   auth_token text,
   type text NOT NULL,

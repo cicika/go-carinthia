@@ -23,3 +23,22 @@ func codeIs20x(statusCode int) bool {
     return false
   }
 }
+
+func ValidateRequired(forValidation []string, r *http.Request)(bool) {
+  cnt := len(forValidation)
+  for i := 0; i < cnt; i++ {
+    if r.FormValue(forValidation[i]) == "" {
+      return false
+    }
+  }
+  return true
+}
+
+func ExtractParams(forExtraction []string, r *http.Request)(map[string]string) {
+  var paramMap map[string]string
+  cnt := len(forExtraction)
+  for i := 0; i < cnt; i++ {
+    paramMap[forExtraction[i]] = r.FormValue(forExtraction[i])
+  }
+  return paramMap
+}

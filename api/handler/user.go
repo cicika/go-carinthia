@@ -9,14 +9,14 @@ import (
   "net/http"
 )
 
-var response model.HttpResponse
-var extracted map[string]string
-
 func RegisterUser(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
-  required := []string{"email", "password", "name"}
+  var response model.HttpResponse
+  var extracted map[string]string
+
+  required := []string{"Email", "Password", "Name"}
 
   if ValidateRequired(required, r) {
-    forExtraction := []string{"email", "password", "name", "beacon_identifier"}
+    forExtraction := []string{"Email", "Password", "Name", "BeaconIdentifier"}
     extracted = ExtractParams(forExtraction, r)
     business.CreateUser(extracted)
     response = model.HttpResponse{200, ""}  
@@ -27,12 +27,15 @@ func RegisterUser(w http.ResponseWriter, r *http.Request, params httprouter.Para
 }
 
 func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-  required := []string{"email", "password"}
+  var response model.HttpResponse
+  var extracted map[string]string
+
+  required := []string{"Email", "Password"}
 
   if ValidateRequired(required, r) {
-    forExtraction := []string{"email", "password"}
+    forExtraction := []string{"Email", "Password"}
     extracted = ExtractParams(forExtraction, r)
-    extracted["password"] = util.MD5(extracted["password"])
+    extracted["Password"] = util.MD5(extracted["Password"])
     user := business.LoginUser(extracted)
     json, _ := json.Marshal(user)
     
@@ -44,11 +47,11 @@ func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 }
 
 func User(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-  response = model.HttpResponse{501, "NotImplemented"}
+  response := model.HttpResponse{501, "NotImplemented"}
   RespondWith(w, response)
 }
 
 func PaymentMethod(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-  response = model.HttpResponse{501, "NotImplemented"}
+  response := model.HttpResponse{501, "NotImplemented"}
   RespondWith(w, response)
 }

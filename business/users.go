@@ -9,28 +9,28 @@ import (
 )
 
 func CreateUser(paramMap map[string]string) {
-  params := []string{paramMap["email"],
-                     util.MD5(paramMap["password"]),
+  params := []string{paramMap["Email"],
+                     util.MD5(paramMap["Password"]),
                      paramMap["name"], 
-                     authToken(paramMap["email"], paramMap["name"]),
+                     authToken(paramMap["Email"], paramMap["name"]),
                      "passenger", "" }
 
   db.Execute(len(params), params, db.UserQ("CreateUser"))
 }
 
 func UpdateUser(paramMap map[string]string){
-  params := []string{paramMap["auth_token"]}
+  params := []string{paramMap["AuthToken"]}
   db.Execute(1, params, db.UserQ("UpdateUser"))
 }
 
 func LoginUser(paramMap map[string]string)(model.User) {
-  params := []string{paramMap["email"], util.MD5(paramMap["password"])}
+  params := []string{paramMap["Email"], util.MD5(paramMap["Password"])}
   rows := db.Execute(len(params), params, db.UserQ("CheckLoginDetails"))
   var id int64
-  var email, name, auth_token, utype string
+  var email, password, name, auth_token, utype string
   var users []model.User
   for rows.Next() {
-    err := rows.Scan(&id, &email, &name, &auth_token, &utype)
+    err := rows.Scan(&id, &email, &password, &name, &auth_token, &utype)
       if err != nil {
         log.Fatal(err)
       }

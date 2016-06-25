@@ -3,13 +3,14 @@ CREATE TABLE IF NOT EXISTS users (
   email text UNIQUE,
   password text,
   name text NOT NULL,
+  age int,
   auth_token text,
   type text NOT NULL,
   beacon_identifier text
 );
 
 CREATE TABLE IF NOT EXISTS beacons (
-  id serial PRIMARY KEY,
+  id serial PRIMARY KE
   identifier text UNIQUE,
   user_id int REFERENCES users,
   transport_type text NOT NULL,

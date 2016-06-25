@@ -25,9 +25,12 @@ func codeIs20x(statusCode int) bool {
 }
 
 func ValidateRequired(forValidation []string, r *http.Request)(bool) {
+  var reqData map[string]string
+  formData := postData(r)
+  json.Unmarshal([]byte(formData), &reqData)
   cnt := len(forValidation)
   for i := 0; i < cnt; i++ {
-    if r.FormValue(forValidation[i]) == "" {
+    if reqData[forValidation[i]] == "" {
       return false
     }
   }
@@ -35,10 +38,28 @@ func ValidateRequired(forValidation []string, r *http.Request)(bool) {
 }
 
 func ExtractParams(forExtraction []string, r *http.Request)(map[string]string) {
+  var reqData map[string]string
+  formData := postData(r)
+  json.Unmarshal([]byte(formData), &reqData)
   var paramMap map[string]string
+  paramMap = make(map[string]string)
   cnt := len(forExtraction)
   for i := 0; i < cnt; i++ {
-    paramMap[forExtraction[i]] = r.FormValue(forExtraction[i])
+    paramMap[forExtraction[i]] = reqData[forExtraction[i]]
   }
   return paramMap
+}
+
+func postData(r *http.Request)(string) {
+ // r.ParseForm()
+  fmt.Printf("%s", r)
+  reqMap := r.Form
+
+  keys := make([]string, len(reqMap))
+  i := 0
+  for k := range reqMap {
+    keys[i] = k
+    i++
+  }
+  return keys[0]
 }

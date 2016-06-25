@@ -1,6 +1,7 @@
 package handler
 
 import (
+  _ "fmt"
   "github.com/julienschmidt/httprouter"
   "github.com/cicika/go-carinthia/business"
   "github.com/cicika/go-carinthia/model"
@@ -12,11 +13,12 @@ import (
 func RegisterUser(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
   var response model.HttpResponse
   var extracted map[string]string
+  //fmt.Printf("%s", r.FormValue("Password"))
+  //fmt.Printf("%s", params.ByName("Email"))
+  required := []string{"Email", "Password", "Name", "Age"}
 
-  required := []string{"Email", "Password", "Name"}
-
-  if ValidateRequired(required, r) {
-    forExtraction := []string{"Email", "Password", "Name", "BeaconIdentifier"}
+  if ValidateRequired(required, r) == true {
+    forExtraction := []string{"Email", "Password", "Name", "Age"}
     extracted = ExtractParams(forExtraction, r)
     business.CreateUser(extracted)
     response = model.HttpResponse{200, ""}  
@@ -32,7 +34,7 @@ func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
   required := []string{"Email", "Password"}
 
-  if ValidateRequired(required, r) {
+  if ValidateRequired(required, r) == true {
     forExtraction := []string{"Email", "Password"}
     extracted = ExtractParams(forExtraction, r)
     extracted["Password"] = util.MD5(extracted["Password"])

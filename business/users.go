@@ -11,8 +11,9 @@ import (
 func CreateUser(paramMap map[string]string) {
   params := []string{paramMap["Email"],
                      util.MD5(paramMap["Password"]),
-                     paramMap["name"], 
-                     authToken(paramMap["Email"], paramMap["name"]),
+                     paramMap["Name"],
+                     paramMap["Age"],
+                     authToken(paramMap["Email"], paramMap["Name"]),
                      "passenger", "" }
 
   db.Execute(len(params), params, db.UserQ("CreateUser"))
@@ -27,14 +28,15 @@ func LoginUser(paramMap map[string]string)(model.User) {
   params := []string{paramMap["Email"], util.MD5(paramMap["Password"])}
   rows := db.Execute(len(params), params, db.UserQ("CheckLoginDetails"))
   var id int64
+  var age int32
   var email, password, name, auth_token, utype string
   var users []model.User
   for rows.Next() {
-    err := rows.Scan(&id, &email, &password, &name, &auth_token, &utype)
+    err := rows.Scan(&id, &email, &password, &name, &age, &auth_token, &utype)
       if err != nil {
         log.Fatal(err)
       }
-      users = append(users, model.User{id, email, name, auth_token, utype, ""})
+      users = append(users, model.User{id, email, name, age, auth_token, utype, ""})
   }
   return users[0]
 }

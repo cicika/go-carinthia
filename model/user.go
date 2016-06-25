@@ -4,6 +4,7 @@ type User struct {
   Id int64
   Email string
   Name string
+  Age int32
   AuthToken string
   Type string
   BeaconIdentifier string

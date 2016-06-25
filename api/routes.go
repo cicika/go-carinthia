@@ -18,9 +18,9 @@ func StartHttpServer() {
   router.GET("/user/", handler.BasicAuth(handler.User))
   router.PUT("/user/payment/method", handler.BasicAuth(handler.PaymentMethod)) /* not quite certain about this */
 
-  router.PUT("/trip/start/", handler.BasicAuth(handler.TripStart))
-  router.PUT("/trip/segment/", handler.BasicAuth(handler.TripSegment))
-  router.PUT("/trip/end/", handler.BasicAuth(handler.TripEnd)) /* Do we need this one? */
+  router.POST("/trip/start/", handler.BasicAuth(handler.TripStart))
+  router.POST("/trip/segment/", handler.BasicAuth(handler.TripSegment))
+  router.POST("/trip/end/", handler.BasicAuth(handler.TripEnd)) /* Do we need this one? */
   router.PUT("/trip/passenger/", handler.BasicAuth(handler.AddPassenger))
   router.DELETE("/trip/passenger/", handler.BasicAuth(handler.RemovePassenger))
   

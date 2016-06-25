@@ -6,7 +6,7 @@ URL: `http://gocarinthia.cicika.info`
 
 `Authorization: GoCarinthia auth_token`
 
-`POST /user/register`
+`PUT /user/register/`
 
 ```json
     Email: mail@address.com,
@@ -19,7 +19,7 @@ Response:
 
 `200 OK`
 
-`POST /user/login`
+`POST /user/login/`
 
 ```json
     Email: mail@addres.com,
@@ -34,7 +34,7 @@ Response:
     Type: passenger
 ```
 
-`POST /trip/start` //depends if you want to start trip separately or on login, 2nd means one action less for the user
+`POST /trip/start/` //depends if you want to start trip separately or on login, 2nd means one action less for the user
 
 ```json
     StartedAt: unix timestamp
@@ -42,7 +42,7 @@ Response:
 
 Response: `200 OK`
 
-`POST /trip/end` //if not posted by device, backend will handle it
+`POST /trip/end/` //if not posted by device, backend will handle it
 
 ```json
     EndedAt: unix timestamp
@@ -50,7 +50,7 @@ Response: `200 OK`
 
 Response: `200 OK`
 
-`POST /trip/segment`
+`POST /trip/segment/`
 
 ```json
     TransportStation: (name or id from location database),

@@ -1,13 +1,11 @@
 package model
 
-import "math/big"
-
 type Trip struct {
   Id int64
   UserId int64
   StartedAt int64 /* Unix timestamp */
   EndedAt int64 /* Unix timestamp */
-  TotalPrice big.Float
+  TotalPrice float32
 }
 
 type TripSegment struct {

@@ -6,6 +6,7 @@ type Trip struct {
   StartedAt int64 /* Unix timestamp */
   EndedAt int64 /* Unix timestamp */
   TotalPrice float32
+  IncompleteSegments bool
 }
 
 type TripSegment struct {

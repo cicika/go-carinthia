@@ -59,3 +59,12 @@ Response: `200 OK`
     created_at: unix timestamp)
     check_in_type: 0 for start, 1 for stop, 2 for end
 ```
+
+`GET /user/:user_id/:beacon_identifier`
+
+Response:
+
+```json
+     last_checkin_at: unix timestamp,
+     beacon_identifier: string
+```

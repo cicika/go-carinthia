@@ -12,8 +12,8 @@ CREATE TABLE IF NOT EXISTS beacons (
   id serial PRIMARY KEY,
   identifier text UNIQUE,
   user_id int REFERENCES users,
-  transport_type text NOT_NULL,
-  provider_id,
+  transport_type text NOT NULL,
+  provider_id int,
   is_stationary boolean
 );
 
@@ -28,7 +28,8 @@ CREATE TABLE IF NOT EXISTS trips (
   user_id int REFERENCES users,
   started_at bigint,
   ended_at bigint,
-  total_price decimal
+  total_price decimal,
+  incomplete_segments boolean DEFAULT false
 );
 
 CREATE TABLE IF NOT EXISTS trip_segments (

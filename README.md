@@ -6,7 +6,7 @@ URL: `http://gocarinthia.cicika.info`
 
 `Authorization: GoCarinthia auth_token`
 
-`PUT /user/register/`
+`PUT /user/`
 
 ```json
     Email: mail@address.com,

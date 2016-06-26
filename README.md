@@ -70,3 +70,12 @@ Response:
      LastCheckinAt: unix timestamp,
      BeaconIdentifier: string
 ```
+
+`POST /user/payment/method/`
+
+```json
+    CardNumner: string
+    CardHolder: string
+    Expiration: string
+    Cvv: integer
+```

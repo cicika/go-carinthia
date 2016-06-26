@@ -1,6 +1,7 @@
 package handler
 
 import (
+  "fmt"
   "github.com/julienschmidt/httprouter"
   "github.com/cicika/go-carinthia/model"
   "github.com/cicika/go-carinthia/business"
@@ -8,6 +9,7 @@ import (
 )
 
 func TripStart(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+  fmt.Printf("%s", r)
   var response model.HttpResponse
   var extracted map[string]string
 

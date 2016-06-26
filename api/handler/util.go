@@ -52,7 +52,7 @@ func ExtractParams(forExtraction []string, r *http.Request)(map[string]string) {
 
 func postData(r *http.Request)(string) {
  // r.ParseForm()
-  fmt.Printf("%s", r)
+  //fmt.Printf("%s", r)
   reqMap := r.Form
 
   keys := make([]string, len(reqMap))

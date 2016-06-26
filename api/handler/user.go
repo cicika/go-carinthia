@@ -8,10 +8,18 @@ import (
   "github.com/cicika/go-carinthia/util"
   "encoding/json"
   "net/http"
+  _"net/http/httputil"
 )
 
-func RegisterUser(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
-  fmt.Printf("%s", r)
+func UserHandler(w http.ResponseWriter, r *http.Request) {
+
+}
+
+func RegisterUser(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+  //fmt.Printf("%s", "                      ")
+  //dump, _ := httputil.DumpRequest(r, true)
+
+  fmt.Printf("%s", r.Body)
   var response model.HttpResponse
   var extracted map[string]string
   required := []string{"Email", "Password", "Name", "BirthYear"}
@@ -29,6 +37,7 @@ func RegisterUser(w http.ResponseWriter, r *http.Request, params httprouter.Para
 }
 
 func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+  fmt.Printf("%s", r)
   var response model.HttpResponse
   var extracted map[string]string
 

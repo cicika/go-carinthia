@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 CREATE TABLE IF NOT EXISTS beacons (
-  id serial PRIMARY KE
+  id serial PRIMARY KEY,
   identifier text UNIQUE,
   user_id int REFERENCES users,
   transport_type text NOT NULL,

@@ -16,4 +16,13 @@ const (
   PassiveBeacon = "passive_beacon"
 )
 
+type PaymentMethod struct {
+  Id int64
+  UserId int64
+  CardNumber int32
+  CardHolder string
+  Expiration string
+  Cvv int32
+}
+
 /* add some methods here */

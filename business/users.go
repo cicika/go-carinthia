@@ -41,6 +41,21 @@ func LoginUser(paramMap map[string]string)(model.User) {
   return users[0]
 }
 
+func AddPaymentMethod(paramMap map[string]string){
+  params := []string{paramMap["UserId"], 
+                     lastFour([]byte(paramMap["CardNumber"])),
+                     paramMap["CardHolder"], paramMap["Expiration"],
+                     paramMap["Cvv"]}
+  db.Execute(len(params), params, db.UserQ("AddPaymentMethod"))
+
+}
+
 func authToken(email string, name string)(string) {
   return util.MD5(strings.Join([]string{email}, name))
+}
+
+func lastFour(input []byte)(string) {
+  start := len(input) - 5
+  end := len(input) - 1
+  return string(append(input[:start], input[end:]...)[:])
 }

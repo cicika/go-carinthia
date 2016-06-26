@@ -54,3 +54,12 @@ CREATE TABLE IF NOT EXISTS transport_stations (
   type text,
   zone_id int
 );
+
+CREATE TABLE IF NOT EXISTS payment_methods (  
+  id serial PRIMARY KEY,
+  user_id int UNIQUE REFERENCES users,
+  card_number int UNIQUE,
+  card_holder text,
+  expiration text,
+  cvv int
+);

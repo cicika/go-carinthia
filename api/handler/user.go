@@ -13,8 +13,6 @@ import (
 func RegisterUser(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
   var response model.HttpResponse
   var extracted map[string]string
-  //fmt.Printf("%s", r.FormValue("Password"))
-  //fmt.Printf("%s", params.ByName("Email"))
   required := []string{"Email", "Password", "Name", "BirthYear"}
 
   if ValidateRequired(required, r) == true {
@@ -53,7 +51,21 @@ func User(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
   RespondWith(w, response)
 }
 
-func PaymentMethod(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-  response := model.HttpResponse{501, "NotImplemented"}
+func PaymentMethod(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
+  var response model.HttpResponse
+  var extracted map[string]string
+
+  required := []string{"CardNumber", "CardHolder", "Expiration", "Cvv"}
+
+  if ValidateRequired(required, r) == true {
+    forExtraction := []string{"CardNumber", "CardHolder", "Expiration", "Cvv"}
+    extracted = ExtractParams(forExtraction, r)
+    extracted["UserId"] = params.ByName("UserId")
+    business.AddPaymentMethod(extracted)
+    
+    response = model.HttpResponse{200, ""}  
+  } else {
+    response = model.HttpResponse{400, "BadRequest"}
+  }
   RespondWith(w, response)
 }

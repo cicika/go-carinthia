@@ -1,23 +1,35 @@
 # Go Carithia 
 
-No fuss. Just ride.
+## No fuss! Just ride :)
+
+## API Documentation
 
 URL: `http://gocarinthia.cicika.info`
 
-`Authorization: GoCarinthia auth_token`
+`Authorization: GoCarinthia <auth_token>`
+
+### User registration
 
 `PUT /user/`
 
+Request:
 ```json
     Email: mail@address.com,
     Name: Full Name,
-    Password: password,
-    BeaconIdentifier: asdfasdf, //optional
+    Password: string,
+    BeaconIdentifier: string, //optional
 ```
 
-Response:
-
+Response: 
 `200 OK`
+```json
+    AuthToken: <token>,
+    UserId: integer
+```
+
+## User login
+
+Request:
 
 `POST /user/login/`
 
@@ -34,15 +46,27 @@ Response:
     Type: passenger
 ```
 
-`POST /trip/start/` //depends if you want to start trip separately or on login, 2nd means one action less for the user
+### Start new trip
+
+Request:
+
+`POST /trip/start/` 
 
 ```json
-    StartedAt: unix timestamp
+    StartedAt: Unix timestamp
 ```
 
-Response: `200 OK`
+Response: 
 
-`POST /trip/end/` //if not posted by device, backend will handle it
+`200 OK`
+
+### End trip
+
+Request:
+
+`POST /trip/end/` 
+
+If not posted by device, backend will handle it.
 
 ```json
     EndedAt: unix timestamp
@@ -50,26 +74,35 @@ Response: `200 OK`
 
 Response: `200 OK`
 
+### Record check in point (trip segment)
+
+Request:
+
 `POST /trip/segment/`
 
 ```json
     TransportStation: (name or id from location database),
     TransportType: type from location database (can be empty),
-    BeaconIdentifier: regiestered beacon,
+    BeaconIdentifier: registered beacon,
     Latitude: 44.28,
     Longitude: 21.13, //don't care about decimals, send all
     CreatedAt: unix timestamp)
     CheckInType: 0 for start, 1 for stop, 2 for end
 ```
+### Passenger check (for controller's device)
 
 `GET /user/:user_id/:beacon_identifier`
 
 Response:
 
 ```json
-     LastCheckinAt: unix timestamp,
-     BeaconIdentifier: string
+    LastCheckinAt: unix timestamp,
+    BeaconIdentifier: string
 ```
+
+### CC details
+
+Request:
 
 `POST /user/payment/method/`
 
@@ -79,3 +112,6 @@ Response:
     Expiration: string
     Cvv: integer
 ```
+
+Response:
+`200 Ok`

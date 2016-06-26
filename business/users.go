@@ -8,7 +8,7 @@ import (
   "github.com/cicika/go-carinthia/util"
 )
 
-func CreateUser(paramMap map[string]string)(string){
+func CreateUser(paramMap map[string]string)(string, int64){
   token := authToken(paramMap["Email"], paramMap["Name"])
   params := []string{paramMap["Email"],
                      util.MD5(paramMap["Password"]),
@@ -16,12 +16,20 @@ func CreateUser(paramMap map[string]string)(string){
                      paramMap["BirthYear"],
                      token,
                      "passenger", "" }
-
-  db.Execute(len(params), params, db.UserQ("CreateUser"))
+  var ids []int64
+  var userId int64
+  rows := db.Execute(len(params), params, db.UserQ("CreateUser"))
+  for rows.Next() {
+    err := rows.Scan(&userId)
+    if err != nil {
+      log.Fatal(err)
+    }
+    ids = append(ids, userId)
+  }
 
   paramMap["AuthToken"] = token
   UpdateUser(paramMap)
-  return token
+  return token, ids[0]
 }
 
 func UpdateUser(paramMap map[string]string){

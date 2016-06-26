@@ -18,8 +18,9 @@ func RegisterUser(w http.ResponseWriter, r *http.Request, params httprouter.Para
   if ValidateRequired(required, r) == true {
     forExtraction := []string{"Email", "Password", "Name", "BirthYear"}
     extracted = ExtractParams(forExtraction, r)
-    authToken := business.CreateUser(extracted)
-    response = model.HttpResponse{200, "{\"AuthToken\":" +"\"" + authToken + "\"}"}  
+    authToken, userId := business.CreateUser(extracted)
+    responseString := "{\"AuthToken\":" +"\"" + authToken + "\", \"UserId\":" + string(userId) + "\"}"
+    response = model.HttpResponse{200, responseString}  
   } else {
     response = model.HttpResponse{400, "BadRequest"}
   }

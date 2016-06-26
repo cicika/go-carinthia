@@ -12,7 +12,7 @@ import (
 
 func PassengerCheck(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
   lastCheckInAt := time.Now().Unix() - 300
-  beacon := "asdfgh"
+  beacon := "EC:F2:FE:70:29:41"
   paxCheck := model.PassengerCheck{lastCheckInAt, beacon}
   json, _ := json.Marshal(paxCheck)
   response := model.HttpResponse{200, string(json[:])}  

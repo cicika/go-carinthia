@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS transport_stations (
 CREATE TABLE IF NOT EXISTS payment_methods (  
   id serial PRIMARY KEY,
   user_id int UNIQUE REFERENCES users,
-  card_number int UNIQUE,
+  card_number text UNIQUE,
   card_holder text,
   expiration text,
   cvv int

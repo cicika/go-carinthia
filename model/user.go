@@ -19,7 +19,7 @@ const (
 type PaymentMethod struct {
   Id int64
   UserId int64
-  CardNumber int32
+  CardNumber string
   CardHolder string
   Expiration string
   Cvv int32

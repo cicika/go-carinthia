@@ -1,7 +1,7 @@
 package handler
 
 import (
-  _ "fmt"
+  "fmt"
   "github.com/julienschmidt/httprouter"
   "github.com/cicika/go-carinthia/business"
   "github.com/cicika/go-carinthia/model"
@@ -11,6 +11,7 @@ import (
 )
 
 func RegisterUser(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
+  fmt.Printf("%s", r)
   var response model.HttpResponse
   var extracted map[string]string
   required := []string{"Email", "Password", "Name", "BirthYear"}

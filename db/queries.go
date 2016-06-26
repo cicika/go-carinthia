@@ -22,3 +22,10 @@ func TripQ(q string)string {
   }
   return mapping[q]
 }
+
+func ReportQ(q string)string {
+  mapping := map[string]string {
+    "CheckPassenger": query.CheckPassenger,
+  }
+  return mapping[q]
+}

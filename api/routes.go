@@ -11,8 +11,9 @@ func StartHttpServer() {
   router := httprouter.New()
 
   router.GET("/ping", handler.Pong)
+  router.GET("/user/:userId/:beaconIdentifier", handler.PassengerCheck)
   
-  router.POST("/login/", handler.Login)
+  router.POST("/user/", handler.Login)
   router.PUT("/user/", handler.RegisterUser)
 
   router.GET("/user/", handler.BasicAuth(handler.User))
